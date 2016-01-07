@@ -1,0 +1,28 @@
+<html>
+<!-- This script plots basic Storyboard (by Team) or all 3PA vs. 3P !-->
+
+<div id="chartContainer">
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="http://dimplejs.org/dist/dimple.v2.1.6.min.js"></script>
+    <script type="text/javascript">
+        var svg = dimple.newSvg("#chartContainer", 590, 400);
+        d3.csv("./agg_team_stat.csv", function (data) {
+
+            var myChart = new dimple.chart(svg, data);
+            myChart.setBounds(60, 30, 500, 330);
+
+            myChart.addMeasureAxis("y", "3PAPG");
+            myChart.addCategoryAxis("x","year")
+            //myChart.addMeasureAxis("z", "PTS");
+
+            // uncomment the line below to enable the story animation
+            var ms=myChart.setStoryboard("Team");
+
+            var s=myChart.addSeries(["year_team","play_off"], dimple.plot.bubble);
+            myChart.addLegend(200, 10, 360, 20, "right");
+            myChart.addLegend();
+            myChart.draw();
+        });
+    </script>
+</div>
+</html>
