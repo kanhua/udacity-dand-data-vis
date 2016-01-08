@@ -6,7 +6,7 @@
 
 
 var svg = dimple.newSvg("#chartContainer", 900, 600);
-d3.csv("agg_team_stat.csv", function (data) {
+d3.csv("../agg_team_stat.csv", function (data) {
 
 
     // Create the indicator chart on the right of the main chart
