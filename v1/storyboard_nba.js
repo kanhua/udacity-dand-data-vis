@@ -50,21 +50,6 @@ d3.csv("../agg_team_stat.csv", function (data) {
         .style("font-size", "11px")
         .attr("transform", "translate(18, 0.5)");
 
-    // This block simply adds the legend title. I put it into a d3 data
-    // object to split it onto 2 lines.  This technique works with any
-    // number of lines, it isn't dimple specific.
-    svg.selectAll("title_text")
-        .data(["Click bar to select",
-            "and pause. Click again",
-            "to resume animation"])
-        .enter()
-        .append("text")
-        .attr("x", 435)
-        .attr("y", function (d, i) { return 15 + i * 12; })
-        .style("font-family", "sans-serif")
-        .style("font-size", "10px")
-        .style("color", "Black")
-        .text(function (d) { return d; });
 
     // Manually set the bar colors
     s.shapes
