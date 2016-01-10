@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Untitled Document</title>
+    <title>Three-pointer evolution in the NBA</title>
     <!-- Bootstrap -->
 	<link href="css/bootstrap.css" rel="stylesheet">
 
@@ -15,6 +15,26 @@
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
   </head>
+  <style>
+
+
+      .axis text {
+          font: 10px sans-serif;
+      }
+
+      .axis path,
+      .axis line {
+          fill: none;
+          stroke: #000;
+          shape-rendering: crispEdges;
+      }
+
+      circle{
+          stroke-width:1;
+      }
+
+
+  </style>
   <body>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 	<script src="js/jquery-1.11.3.min.js"></script>
@@ -30,8 +50,19 @@
     </div>
     </div>
     <div class="row">
-      <div class="col-md-10"></div>
-      <div class="col-md-2"></div>
+      <div class="col-md-9">
+          <div class="row">
+              <svg id="chartContainer"></svg>
+          </div>
+
+          <div class="row">
+              <svg id="statButtonContainer"></svg>
+          </div>
+
+      </div>
+      <div class="col-md-3">
+          <svg id="teamButtonContainer"></svg>
+      </div>
     </div>
   </div>
   </body>

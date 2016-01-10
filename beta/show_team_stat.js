@@ -18,13 +18,13 @@ d3.csv("../agg_team_stat.csv", function (d) {
 }, function (data) {
 
 
-    var margin = {"top": 75, "bottom": 75, "left": 75, "right": 75},
-        svg_width = 900,
-        svg_height = 900,
-        chart_width = 700 - margin.left,
-        chart_height = 500 - margin.right,
+    var margin = {"top": 15, "bottom": 75, "left": 75, "right": 75},
+        svg_width = 700,
+        svg_height = 600,
+        chart_width = svg_width - margin.left,
+        chart_height = svg_height - margin.right,
         label_width = 150;
-    y_stat_start = 500;
+    y_stat_start = 0;
     label_height = svg_height;
 
 
@@ -52,7 +52,6 @@ d3.csv("../agg_team_stat.csv", function (d) {
 
         if (highlightTeam.indexOf(d["Team"]) >= 0) {
 
-            console.log(d["Team"]);
             return team_code[d["Team"]]["color2"];
         }
         else {
@@ -60,12 +59,22 @@ d3.csv("../agg_team_stat.csv", function (d) {
         }
     }
 
+    function getOpacity(d){
+        if (highlightTeam.indexOf(d["Team"]) >= 0) {
+
+            return 0.8
+        }
+        else {
+            return 0.2;
+        }
+    }
+
 
     function fillDataPointColor(dataPoint) {
 
-        dataPoint.attr("fill", getStrokeColor)
-            .attr("stroke", getFillColor)
-            .attr("stroke-width", 1);
+        dataPoint.attr("fill", getFillColor)
+            .attr("stroke", getStrokeColor)
+            .attr("opacity",getOpacity);
     }
 
     // a flag that determines whether the elements have already drawed
@@ -157,7 +166,7 @@ d3.csv("../agg_team_stat.csv", function (d) {
             main_chart_g.select("#xlabel").remove();
         }
 
-
+        // Make y axis on the main chart
         main_chart_g.append("text")
             .attr("id", "ylabel")
             .attr("transform", "rotate(-90)")
@@ -167,7 +176,7 @@ d3.csv("../agg_team_stat.csv", function (d) {
             .style("text-anchor", "middle")
             .text(featureName);
 
-
+        // Make x axis on the main chart
         main_chart_g.append("text")
             .attr("id", "xlabel")
             .attr("y", chart_height + 20)
@@ -195,15 +204,14 @@ d3.csv("../agg_team_stat.csv", function (d) {
     team_name.remove("League Average");
     team_name = team_name.values();
 
-    var chart_svgg = d3.select("#chartContainer")
-        .append("g")
-        .attr("width", label_width)
-        .attr("height", label_height);
+    var chart_svgg = d3.select("#teamButtonContainer")
+        .attr("width",label_width)
+        .attr("height",label_height);
 
 
     function fillBarColor(bd,bar)
     {
-        if (highlightTeam.indexOf(bd) >= 0) {
+        if (highlightTeam.indexOf(bd) < 0) {
             d3.select(bar)
                 .select("rect")
                 .attr("fill", "white");
@@ -228,7 +236,7 @@ d3.csv("../agg_team_stat.csv", function (d) {
         .enter()
         .append("g")
         .attr("transform", function (d, i) {
-            return "translate(" + (chart_width + 20) + "," + i * barHeight + ")";
+            return "translate(" + 0 + "," + i * barHeight + ")";
         })
         .on("click", function (bd) {
 
@@ -282,15 +290,16 @@ d3.csv("../agg_team_stat.csv", function (d) {
     var y_stat_label_width = 100;
     var y_stat_label_height = 20;
     var y_stat_g_width = 105;
-    var y_sel_bar_g = d3.select("#chartContainer")
-        .append("g");
+    var y_sel_bar_g = d3.select("#statButtonContainer")
+        .attr("width",y_stat.length*y_stat_g_width)
+        .attr("height",y_stat_label_height*1.1);
 
     var y_sel_bar_gg = y_sel_bar_g.selectAll("g")
         .data(y_stat)
         .enter()
         .append("g")
         .attr("transform", function (d, i) {
-            return "translate(" + (100 + i * y_stat_g_width) + "," + y_stat_start + ")";
+            return "translate(" + (i * y_stat_g_width) + "," + y_stat_start + ")";
         })
         .on("click", function (d) {
             drawMainChart(d);
@@ -305,9 +314,13 @@ d3.csv("../agg_team_stat.csv", function (d) {
 
     y_sel_bar_gg.append("text")
         .attr("y", 10)
+        .attr("dy","0.35em")
+        .attr("x",y_stat_label_width/2)
         .text(function (d) {
             return d;
         })
+        .attr("dx","-1em");
+
 
 
 });
