@@ -59,7 +59,7 @@ d3.csv("../agg_team_stat.csv", function (d) {
         }
     }
 
-    function getOpacity(d){
+    function getOpacity(d) {
         if (highlightTeam.indexOf(d["Team"]) >= 0) {
 
             return 0.8
@@ -74,7 +74,7 @@ d3.csv("../agg_team_stat.csv", function (d) {
 
         dataPoint.attr("fill", getFillColor)
             .attr("stroke", getStrokeColor)
-            .attr("opacity",getOpacity);
+            .attr("opacity", getOpacity);
     }
 
     // a flag that determines whether the elements have already drawed
@@ -205,12 +205,11 @@ d3.csv("../agg_team_stat.csv", function (d) {
     team_name = team_name.values();
 
     var chart_svgg = d3.select("#teamButtonContainer")
-        .attr("width",label_width)
-        .attr("height",label_height);
+        .attr("width", label_width)
+        .attr("height", label_height);
 
 
-    function fillBarColor(bd,bar)
-    {
+    function fillBarColor(bd, bar) {
         if (highlightTeam.indexOf(bd) < 0) {
             d3.select(bar)
                 .select("rect")
@@ -249,7 +248,7 @@ d3.csv("../agg_team_stat.csv", function (d) {
             }
 
 
-            fillBarColor(bd,this);
+            fillBarColor(bd, this);
 
             fillDataPointColor(datapoint);
         })
@@ -291,8 +290,8 @@ d3.csv("../agg_team_stat.csv", function (d) {
     var y_stat_label_height = 20;
     var y_stat_g_width = 105;
     var y_sel_bar_g = d3.select("#statButtonContainer")
-        .attr("width",y_stat.length*y_stat_g_width)
-        .attr("height",y_stat_label_height*1.1);
+        .attr("width", y_stat.length * y_stat_g_width)
+        .attr("height", y_stat_label_height * 1.1);
 
     var y_sel_bar_gg = y_sel_bar_g.selectAll("g")
         .data(y_stat)
@@ -314,13 +313,29 @@ d3.csv("../agg_team_stat.csv", function (d) {
 
     y_sel_bar_gg.append("text")
         .attr("y", 10)
-        .attr("dy","0.35em")
-        .attr("x",y_stat_label_width/2)
+        .attr("dy", "0.35em")
+        .attr("x", y_stat_label_width / 2)
         .text(function (d) {
             return d;
         })
-        .attr("dx","-1em");
+        .attr("dx", "-1em");
 
+    var bpBtnGroup = d3.select("#stat-btn-group");
+    bpBtnGroup.selectAll("button")
+        .data(y_stat)
+        .enter()
+        .append("button")
+        .attr("type", "button")
+        .attr("class", "btn btn-default")
+        .attr("id", function (d) {
+            return d;
+        })
+        .text(function (d) {
+            return d;
+        })
+        .on("click", function (d) {
+            drawMainChart(d);
+        });
 
 
 });

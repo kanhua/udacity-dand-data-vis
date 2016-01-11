@@ -34,6 +34,8 @@
       }
 
 
+
+
   </style>
   <body>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
@@ -45,24 +47,55 @@
  
   <div class="container">
   	<div class="row">
-    <div class="col-md-12">
-    The evolution of NBA three-pointers
+    <div class="col-md-12" class=title">
+    <h2>The evolution of three-point shots in the NBA</h2>
     </div>
     </div>
+    
+    <div class="row">
+    <div class="col-md-9">
+            <p>In basketball games, a team earned three-points if the a successful shot is made behind the three-point arc, which is typically 23 feed from the hoop. If a successful shot is made within the three-point arc, the team earned two-points instead. Modern NBA teams rely more and more three-point shots in their offense.</p>
+        <p>In this visualization, you can explore this trend by clicking your favourite team and the statistics that you would like to explore. </p>
+    </div>
+    <div class="col-md-3">
+    
+    </div>
+    </div>
+    
     <div class="row">
       <div class="col-md-9">
-          <div class="row">
-              <svg id="chartContainer"></svg>
-          </div>
 
           <div class="row">
-              <svg id="statButtonContainer"></svg>
+          
+              <svg id="chartContainer"></svg>
+          
+          </div>
+
+        <div class="row">
+          
+          <svg id="statButtonContainer"></svg>
+            <!-- the example codes of bootstrap buttons
+          <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default">Button 1</button>
+                <button type="button" class="btn btn-default disabled">Disabled Button</button>
+                <button type="button" class="btn btn-default active">Active Button</button>
+          </div>
+          !-->
+            <div id="stat-btn-group" class="btn-group" role="group">
+            </div>
           </div>
 
       </div>
       <div class="col-md-3">
           <svg id="teamButtonContainer"></svg>
       </div>
+    </div>
+    <div class="row">
+    <p>3PAPG: averaged three-pointer attempted per game</p>
+    <p>3PA: total three-point shots attemped during the season</p>
+    <p>3P: total three-point shots made during the season</p>
+    
+    
     </div>
   </div>
   </body>
