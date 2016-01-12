@@ -285,44 +285,13 @@ d3.csv("../agg_team_stat.csv", function (d) {
 
 
     // Place the buttons for selecting different statistics
-    var y_stat = ["3PAPG", "3PA", "3P"];
-    var y_stat_label_width = 100;
-    var y_stat_label_height = 20;
-    var y_stat_g_width = 105;
-    var y_sel_bar_g = d3.select("#statButtonContainer")
-        .attr("width", y_stat.length * y_stat_g_width)
-        .attr("height", y_stat_label_height * 1.1);
-
-    var y_sel_bar_gg = y_sel_bar_g.selectAll("g")
-        .data(y_stat)
-        .enter()
-        .append("g")
-        .attr("transform", function (d, i) {
-            return "translate(" + (i * y_stat_g_width) + "," + y_stat_start + ")";
-        })
-        .on("click", function (d) {
-            drawMainChart(d);
-        });
+    var yFeatures = ["3PAPG", "3PA", "3P"];
 
 
-    y_sel_bar_gg.append("rect")
-        .attr("fill", "red")
-        .attr("width", y_stat_label_width)
-        .attr("height", y_stat_label_height)
-
-
-    y_sel_bar_gg.append("text")
-        .attr("y", 10)
-        .attr("dy", "0.35em")
-        .attr("x", y_stat_label_width / 2)
-        .text(function (d) {
-            return d;
-        })
-        .attr("dx", "-1em");
 
     var bpBtnGroup = d3.select("#stat-btn-group");
     bpBtnGroup.selectAll("button")
-        .data(y_stat)
+        .data(yFeatures)
         .enter()
         .append("button")
         .attr("type", "button")
