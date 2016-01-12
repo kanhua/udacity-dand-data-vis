@@ -18,7 +18,9 @@ d3.csv("../agg_team_stat.csv", function (d) {
 }, function (data) {
 
 
-    var margin = {"top": 15, "bottom": 75, "left": 75, "right": 75},
+
+
+    var margin = {"top": 15, "bottom": 25, "left": 75, "right": 75},
         svg_width = 700,
         svg_height = 600,
         chart_width = svg_width - margin.left,
@@ -36,6 +38,7 @@ d3.csv("../agg_team_stat.csv", function (d) {
 
 
     var highlightTeam = [];
+    var currentFeature="3PAPG";
 
 
     function getFillColor(d) {
@@ -190,7 +193,7 @@ d3.csv("../agg_team_stat.csv", function (d) {
         return datapoint;
     }
 
-    var datapoint = drawMainChart("3PAPG");
+    var datapoint = drawMainChart(currentFeature);
 
 
     var barHeight = 20,
@@ -284,9 +287,21 @@ d3.csv("../agg_team_stat.csv", function (d) {
         });
 
 
+
+
+
     // Place the buttons for selecting different statistics
     var yFeatures = ["3PAPG", "3PA", "3P"];
 
+    function updateButtonStatus(d)
+    {
+       if (d==currentFeature){
+           return "btn btn-default active";
+       }
+        else{
+          return "btn btn-default";
+       }
+    };
 
 
     var bpBtnGroup = d3.select("#stat-btn-group");
@@ -295,7 +310,7 @@ d3.csv("../agg_team_stat.csv", function (d) {
         .enter()
         .append("button")
         .attr("type", "button")
-        .attr("class", "btn btn-default")
+        .attr("class", updateButtonStatus)
         .attr("id", function (d) {
             return d;
         })
@@ -304,6 +319,9 @@ d3.csv("../agg_team_stat.csv", function (d) {
         })
         .on("click", function (d) {
             drawMainChart(d);
+            currentFeature=d;
+            bpBtnGroup.selectAll("button")
+                .attr("class",updateButtonStatus);
         });
 
 
