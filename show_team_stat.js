@@ -41,6 +41,11 @@ d3.csv("./agg_team_stat.csv", function (d) {
     var highlightTeam = [];
     var currentFeature="3PAPG";
 
+    var tooltipDiv=d3.select("#chartDiv")
+        .append("div")
+        .attr("class","tooltip")
+        .style("opacity",0);
+
 
     function getFillColor(d) {
         if (highlightTeam.indexOf(d["Team"]) >= 0) {
@@ -160,7 +165,22 @@ d3.csv("./agg_team_stat.csv", function (d) {
             .attr("cy", function (d) {
                 return y_scale(d[featureName]);
             })
-            .attr("r", dataPointRadius);
+            .attr("r", dataPointRadius)
+            .on("mouseover",function(d)
+            {
+               debugger;
+                tooltipDiv.transition()
+                   .duration(200)
+                   .style("opacity",9);
+                tooltipDiv.html(d["Team"])
+                    .style("left",d3.select(this).attr("cx")+"px")
+                    .style("top",d3.select(this).attr("cy")+'px');
+            })
+            .on("mouseout",function(d){
+                tooltipDiv.transition()
+                    .duration(500)
+                    .style("opacity",0);
+            });
 
         fillDataPointColor(datapoint);
 

@@ -33,7 +33,21 @@
           stroke-width:1;
       }
 
+      div.tooltip{
+          position: absolute;
+          text-align: center;
+          width: 70px;
+          height: 28px;
+          padding: 2px;
+          font: 10px sans-serif;
+          background: lightsteelblue;
+          border:0px;
+          border-radius: 8px;
+          pointer-events: none;
 
+
+
+      }
 
 
   </style>
@@ -65,7 +79,7 @@
     <div class="row">
       <div class="col-md-8">
 
-          <div class="row">
+          <div class="row" id="chartDiv">
           
               <svg id="chartContainer"></svg>
           
