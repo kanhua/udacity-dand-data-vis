@@ -8,17 +8,17 @@ function getFeature(d, feature_name) {
     return d[feature_name];
 }
 
-d3.csv("../agg_team_stat.csv", function (d) {
+d3.csv("./agg_team_stat.csv", function (d) {
     d["3P"] = +d["3P"];
     d["3PA"] = +d["3PA"];
     d["year"] = +d["year"];
     d["G"] = +d["G"];
     d["3PAPG"] = +d["3PAPG"];
+    d["3P%"]=+d["3P%"];
     return d;
 }, function (data) {
 
 
-    // Set the layout parameters of the main chart
 
 
     var margin = {"top": 15, "bottom": 25, "left": 75, "right": 75},
@@ -45,7 +45,7 @@ d3.csv("../agg_team_stat.csv", function (d) {
     function getFillColor(d) {
         if (highlightTeam.indexOf(d["Team"]) >= 0) {
 
-            return teamColorCode[d["Team"]]["color1"];
+            return team_code[d["Team"]]["color1"];
         }
         else {
             return "grey";
@@ -56,7 +56,7 @@ d3.csv("../agg_team_stat.csv", function (d) {
 
         if (highlightTeam.indexOf(d["Team"]) >= 0) {
 
-            return teamColorCode[d["Team"]]["color2"];
+            return team_code[d["Team"]]["color2"];
         }
         else {
             return "grey";
@@ -86,6 +86,8 @@ d3.csv("../agg_team_stat.csv", function (d) {
 
     function drawMainChart(featureName) {
 
+
+        var dataPointRadius = 8;
 
         var x_scale = d3.scale.linear()
             .range([margin.left, chart_width])
@@ -157,8 +159,8 @@ d3.csv("../agg_team_stat.csv", function (d) {
             })
             .attr("cy", function (d) {
                 return y_scale(d[featureName]);
-            });
-
+            })
+            .attr("r", dataPointRadius);
 
         fillDataPointColor(datapoint);
 
@@ -198,13 +200,13 @@ d3.csv("../agg_team_stat.csv", function (d) {
     var barHeight = 20,
         barWidth = 150;
 
-    var teamName = data.map(function (d) {
+    var team_name = data.map(function (d) {
         return d["Team"];
     });
 
-    teamName = d3.set(teamName);
-    teamName.remove("League Average");
-    teamName = teamName.values();
+    team_name = d3.set(team_name);
+    team_name.remove("League Average");
+    team_name = team_name.values();
 
     var chart_svgg = d3.select("#teamButtonContainer")
         .attr("width", label_width)
@@ -218,22 +220,22 @@ d3.csv("../agg_team_stat.csv", function (d) {
                 .attr("fill", "white");
             d3.select(bar)
                 .select("text")
-                .attr("fill", teamColorCode[bd]["color1"]);
+                .attr("fill", team_code[bd]["color1"]);
 
         }
         else {
             d3.select(bar)
                 .select("rect")
-                .attr("fill", teamColorCode[bd]["color1"]);
+                .attr("fill", team_code[bd]["color1"]);
             d3.select(bar)
                 .select("text")
-                .attr("fill", teamColorCode[bd]["color2"]);
+                .attr("fill", team_code[bd]["color2"]);
         }
     }
 
 
     var bar = chart_svgg.selectAll("g")
-        .data(teamName)
+        .data(team_name)
         .enter()
         .append("g")
         .attr("transform", function (d, i) {
@@ -262,14 +264,14 @@ d3.csv("../agg_team_stat.csv", function (d) {
         .attr("height", barHeight - 4)
         .attr("fill", function (d) {
             if (highlightTeam.indexOf(d) >= 0) {
-                return teamColorCode[d]["color1"];
+                return team_code[d]["color1"];
             }
             else {
                 return "white";
             }
         })
         .attr("stroke", function (d) {
-            return teamColorCode[d]["color2"];
+            return team_code[d]["color2"];
         })
         .attr("stroke-width", 1);
 
@@ -279,7 +281,7 @@ d3.csv("../agg_team_stat.csv", function (d) {
         .attr("y", barHeight / 2)
         .attr("dy", ".35em")
         .attr("fill", function (d) {
-            return teamColorCode[d]["color1"];
+            return team_code[d]["color1"];
         })
         .text(function (d) {
             return d;
@@ -290,7 +292,7 @@ d3.csv("../agg_team_stat.csv", function (d) {
 
 
     // Place the buttons for selecting different statistics
-    var yFeatures = ["3PAPG", "3PA", "3P"];
+    var yFeatures = ["3PAPG", "3PA", "3P","3P%"];
 
     function updateButtonStatus(d)
     {
