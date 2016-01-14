@@ -22,12 +22,7 @@ According to the feedback, I want to add the following features:
 1. The statstics of the selected team can be compared with all the NBA teams.
 2. The color codes of each team can be consistent to the NBA teams. 
 
-Since these features cannot be implemented by the APIs of dimple.js, we turned back to D3 and start from scratch.
-
-
-
-
-
+Since these features cannot be implemented by the APIs of dimple.js, we turned back to D3 and started from scratch.
 
 
 
@@ -36,3 +31,4 @@ Since these features cannot be implemented by the APIs of dimple.js, we turned b
 ## Resources
 - Source of data: [basketball-reference.com](http://basketball-reference.com)
 - Color codes of team: [Team Color Codes](http://teamcolorcodes.com)
+- Basketball court chart: [Basketball diagrams](http://li16-138.members.linode.com/sportsdiagrams/BasketballDiagrams.html) 
