@@ -39,7 +39,7 @@
           width: 70px;
           height: 28px;
           padding: 2px;
-          font: 10px sans-serif;
+          font: 8px sans-serif;
           background: lightsteelblue;
           border:0px;
           border-radius: 8px;
@@ -66,16 +66,26 @@
     
     <div class="row">
     <div class="col-md-8">
-            <p>In basketball games, a team earned three points if the a successful shot is made behind the three-point arc,
+        <h4>Background</h4>
+            <p>In basketball games, a team earned three points if the a successful shot is made behind the three-point arc by the player,
                 which is typically 23 feet from the hoop. If a successful shot is made within the three-point arc,
-                the team earned two-points instead.</p>
+                the team earned two-points instead. In a round of offense, a team can choose to make a two-point shot or three-point shot.</p>
+        <h4>Should you take the risk and shoot the three-pointer?</h4>
+            In short, the dilemma that the basketball players are facing is:
+        should you take greater risk, shoot the ball further from the basket that potentially gives you three points?
+        or should you shoot the ball near the basket but only get two points?
 
-            <p>In short, the dilemma of the coach and the players are facing is:
-        should you take greater risk, make shoot far from the basket that potentially gives you three points?
-        or should you shoot the ball near the basket but only get two points? </p>
+        <h4>A "crowd wisdom" approach to this problem</h4>
+        <p>Answering this question requires a lot of knowledge of basketball game and its related statistical metrics.
+        Every professional basketball club has a team to do these analysis and decide the optimal strategy
+        based on the capability of their player or what kind of player they should draft.</p>
 
-                <p>This visualization shows several statistical metrics by each NBA team during 1990 to 2016.</p>
-        <p>Source <a href="http://basketball-reference.com">basketball-reference.com</a> </p>
+        <p>We do not have these knowledge or resources. However, we can explore the basketball data that are available
+        to the public to get some clues of how these professionals think and act.</p>
+
+        <p>This visualization shows several statistical metrics by each NBA team during 1990 to 2016.
+            You click the teams and the metrics that you are interested in to explore the recent evolution of three-pointers in the NBA</p>
+
     </div>
     <div class="col-md-4" >
     </div>
@@ -83,8 +93,7 @@
 
       <div class="row">
           <div class="col-md-8">
-
-
+              <p>Source <a href="http://basketball-reference.com">basketball-reference.com</a> </p>
           </div>
           <div class="col-md-2">
               <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
@@ -139,17 +148,17 @@
 
     <div class="row">
         <div class="col-md-8">
-            <h4>Explanation of metrics </h4>
-    <p>3PAPG: averaged three-point shots attempted per game of a team during a season</p>
-    <p>3PA: total three-point shots attemped by a team during the season</p>
-    <p>3P: total successful three-point shots of a team during the season</p>
-        <p>3P%: shot percentage of a team during a season, i.e., 3P divided by 3PA of each team.</p>
-        <h4><p>Remarks and obervations</p></h4>
+            <h4>Terminology: </h4>
+            <p>Season: A basketball season starts from the October of a year and ends in June of the next year.
+                The year of season shown in this visualization is the end year of a season.
+                For example, 2000 means the season that starts in the October of 1998 and ends in June of 1999.
+            Each team has 82 games in a season.</p>
+            <p>3PAPG: averaged three-point shots attempted per game of a team during a season</p>
+            <p>3PA: total three-point shots attempted by a team during the season</p>
+            <p>3P: total successful three-point shots of a team during the season</p>
+            <p>3P%: successful rate of three-point shots of a team during a season, i.e., 3P divided by 3PA of each team. This is also known as three-point shot percentage.</p>
+        <h4><p>A few remarks of the metrics</p></h4>
         <ol>
-            <li>
-               The NBA teams shoots more and more three-pointer.
-                The median of 3PAPG increased almost three times during the span of 1990 to 2016.
-            </li>
 
             <li>
                 The small spike of 3PAPG during 1995 and 1997 is due to that the three point line was shortened to 22 feet,
@@ -157,20 +166,44 @@
             </li>
 
             <li>
-                3P and 3PA are particularly low in 1999, 2012 and 2016 because of the following reason: 2016 is an ongoing season.
-                In the season of 1999 and 2012, the total play games are reduced because of lockout,
-                which is due to the player association fails to make a deal with the league.
-                In 1999 season, only 50 games are played, whereas only 66 games were played in 2012 season.
+                3P and 3PA are particularly low in 1999, 2012 and 2016 because of the following reason:
+                <ol>
+                    <li>
+                        1999: A lockout occurs because the the player association fails to make a deal
+                        with the team owners before the seaon start. Only 50 games were played by each team in the season.
+                    </li>
+                    <li>
+                        2012: Also a lockout season. Only 66 games were played by each team in this season.
+                    </li>
+                    <li>
+                        2016: A season that is still ongoing.
+
+                    </li>
+
+                </ol>
 
             </li>
 
-            <li>
-                Although the three point shots dramatically increase, the shot percentage remains stable.
-                This indicates that the most the NBA team are very disciplined in attempting their three-point shots.
 
-            </li>
 
         </ol>
+
+            <h4>So, is three-pointer worth the risk?</h4>
+                The NBA teams shoot more and more three-point shots since 1990. This trends indicates that the NBA teams acknowledges that three-point shot is an effective way in getting points.
+            However, despite that the three-point shot attempts are increasing, the shot percentage (3P%) remains stable during these years. The average is around 35%. This observation has a couple of implications:
+            <ol>
+                <li>
+                    A player is willing to take a three-point shot if he thinks that he can shoot around 35% or more. In other words, it has long been recognized by the professional players that a three-point shot is worth the risk if the successful rate around 35%. From the defense point of view, if you are allowing your opponents to shoot three-point shots better than this, then you should fix your defense in order to keep competitive in this league. As a result, the three-point shot percentage reach some kind of "equilibrium" at this level".
+                </li>
+
+                <li>
+                    The three-point shot attempts increases but the shot percentage (35%) is relatively stable. This indicates that more players on the court are able to shoot the three-point shots well, whereas the three-point shots are only made by a few specialist in the old days.
+
+                </li>
+
+            </ol>
+
+
 
     </div>
     </div>

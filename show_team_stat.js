@@ -26,7 +26,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
         svg_height = 600,
         chart_width = svg_width - margin.left,
         chart_height = svg_height - margin.right,
-        label_width = 150;
+        label_width = 170;
     y_stat_start = 0;
     label_height = svg_height;
 
@@ -168,11 +168,10 @@ d3.csv("./agg_team_stat.csv", function (d) {
             .attr("r", dataPointRadius)
             .on("mouseover",function(d)
             {
-               debugger;
                 tooltipDiv.transition()
                    .duration(200)
                    .style("opacity",9);
-                tooltipDiv.html(d["Team"])
+                tooltipDiv.html("season:"+d["year"]+"</br>"+"Team:"+d["Team"])
                     .style("left",d3.select(this).attr("cx")+"px")
                     .style("top",d3.select(this).attr("cy")+'px');
             })
@@ -207,7 +206,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
             .attr("x", (chart_width / 2))
             .attr("dy", "1em")
             .style("text-anchor", "middle")
-            .text("year");
+            .text("season");
 
 
         data_drawed = true;
@@ -218,7 +217,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
 
     var barHeight = 20,
-        barWidth = 150;
+        barWidth = 160;
 
     var team_name = data.map(function (d) {
         return d["Team"];
