@@ -14,11 +14,9 @@ d3.csv("./agg_team_stat.csv", function (d) {
     d["year"] = +d["year"];
     d["G"] = +d["G"];
     d["3PAPG"] = +d["3PAPG"];
-    d["3P%"]=+d["3P%"];
+    d["3P%"] = +d["3P%"];
     return d;
 }, function (data) {
-
-
 
 
     var margin = {"top": 15, "bottom": 25, "left": 75, "right": 75},
@@ -31,6 +29,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
     label_height = svg_height;
 
 
+
     var main_chart_g = d3.select("#chartContainer")
         .attr("width", svg_width)
         .attr("height", svg_height)
@@ -39,12 +38,12 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
 
     var highlightTeam = [];
-    var currentFeature="3PAPG";
+    var currentFeature = "3PAPG";
 
-    var tooltipDiv=d3.select("#chartDiv")
+    var tooltipDiv = d3.select("#chartDiv")
         .append("div")
-        .attr("class","tooltip")
-        .style("opacity",0);
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
 
     function getFillColor(d) {
@@ -166,19 +165,18 @@ d3.csv("./agg_team_stat.csv", function (d) {
                 return y_scale(d[featureName]);
             })
             .attr("r", dataPointRadius)
-            .on("mouseover",function(d)
-            {
+            .on("mouseover", function (d) {
                 tooltipDiv.transition()
-                   .duration(200)
-                   .style("opacity",9);
-                tooltipDiv.html("season:"+d["year"]+"</br>"+"Team:"+d["Team"])
-                    .style("left",d3.select(this).attr("cx")+"px")
-                    .style("top",d3.select(this).attr("cy")+'px');
+                    .duration(200)
+                    .style("opacity", 9);
+                tooltipDiv.html("season:" + d["year"] + "</br>" + "Team:" + d["Team"])
+                    .style("left", d3.select(this).attr("cx") + "px")
+                    .style("top", d3.select(this).attr("cy") + 'px');
             })
-            .on("mouseout",function(d){
+            .on("mouseout", function (d) {
                 tooltipDiv.transition()
                     .duration(500)
-                    .style("opacity",0);
+                    .style("opacity", 0);
             });
 
         fillDataPointColor(datapoint);
@@ -307,20 +305,16 @@ d3.csv("./agg_team_stat.csv", function (d) {
         });
 
 
-
-
-
     // Place the buttons for selecting different statistics
-    var yFeatures = ["3PAPG", "3PA", "3P","3P%"];
+    var yFeatures = ["3PAPG", "3PA", "3P", "3P%"];
 
-    function updateButtonStatus(d)
-    {
-       if (d==currentFeature){
-           return "btn btn-default active";
-       }
-        else{
-          return "btn btn-default";
-       }
+    function updateButtonStatus(d) {
+        if (d == currentFeature) {
+            return "btn btn-default active";
+        }
+        else {
+            return "btn btn-default";
+        }
     };
 
 
@@ -339,10 +333,37 @@ d3.csv("./agg_team_stat.csv", function (d) {
         })
         .on("click", function (d) {
             drawMainChart(d);
-            currentFeature=d;
+            currentFeature = d;
             bpBtnGroup.selectAll("button")
-                .attr("class",updateButtonStatus);
+                .attr("class", updateButtonStatus);
         });
+
+    var lavgButton = d3.select("#lavg");
+    lavgButton.on("click", function (d) {
+
+        if (lavgButton.attr("class")=="btn btn-default")
+        {
+            highlightTeam.push("League Average");
+
+            fillDataPointColor(datapoint);
+
+            lavgButton.attr("class","btn btn-default active");
+
+        }
+        else if (lavgButton.attr("class")=="btn btn-default active")
+        {
+            highlightTeam.splice(highlightTeam.indexOf("League Average"));
+
+
+            fillDataPointColor(datapoint);
+
+            lavgButton.attr("class","btn btn-default");
+
+        }
+
+
+
+    });
 
 
 });
