@@ -91,7 +91,6 @@ d3.csv("./agg_team_stat.csv", function (d) {
     function drawMainChart(featureName) {
 
 
-        var dataPointRadius = 8;
 
         var x_scale = d3.scale.linear()
             .range([margin.left, chart_width])
@@ -164,19 +163,24 @@ d3.csv("./agg_team_stat.csv", function (d) {
             .attr("cy", function (d) {
                 return y_scale(d[featureName]);
             })
-            .attr("r", dataPointRadius)
             .on("mouseover", function (d) {
                 tooltipDiv.transition()
                     .duration(200)
-                    .style("opacity", 9);
+                    .style("opacity", 0.8);
                 tooltipDiv.html("season:" + d["year"] + "</br>" + "Team:" + d["Team"])
-                    .style("left", d3.select(this).attr("cx") + "px")
+                    .style("left", (d3.select(this).attr("cx")+3).toString() + "px")
                     .style("top", d3.select(this).attr("cy") + 'px');
+
+                d3.select(this)
+                    .attr("class","circle mouseon");
+
             })
             .on("mouseout", function (d) {
                 tooltipDiv.transition()
                     .duration(500)
                     .style("opacity", 0);
+                d3.select(this)
+                    .attr("class","");
             });
 
         fillDataPointColor(datapoint);
@@ -188,14 +192,41 @@ d3.csv("./agg_team_stat.csv", function (d) {
         }
 
         // Make y axis on the main chart
+        var yLabelg=main_chart_g.append("g");
+
+        //var yLabelgDiv =d3.select("#chartDiv")
+        //    .append("div")
+        //    .attr("class", "tooltip")
+        //    .style("opacity", 0);
+
         main_chart_g.append("text")
             .attr("id", "ylabel")
             .attr("transform", "rotate(-90)")
-            .attr("y", 30)
+            .attr("y", 25)
             .attr("x", 0 - (chart_height / 2))
             .attr("dy", "1em")
             .style("text-anchor", "middle")
-            .text(featureName);
+            .text(featureName+"[?]")
+            .on("mouseover", function(d){
+
+                console.log("mouseover text");
+                console.log(d3.mouse(yLabelg.node()));
+                tooltipDiv.transition()
+                    .duration(200)
+                    .style("opacity", 1);
+                tooltipDiv.html(yFeatureExp[featureName])
+                   // .style("left", d3.mouse(d3.select("#chartContainer").node())[0])
+                   // .style("top", d3.mouse(d3.select("#chartContainer").node())[1]-300);
+                    .style("left",(50).toString()+"px")
+                    .style("top",(233).toString()+"px");
+            })
+            .on("mouseout",function(d){
+
+                tooltipDiv.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+
+            });
 
         // Make x axis on the main chart
         main_chart_g.append("text")

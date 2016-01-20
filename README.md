@@ -17,6 +17,8 @@ The initial version was made by modifying [this example](http://dimplejs.org/adv
 
 <img src="./chart_snapshot/v1snapshot.png" width="70%">
 
+<img src="./chart_snapshot/v2snapshot.png" width="70%>
+
 According to the feedback, I want to add the following features:
 
 1. The statstics of the selected team can be compared with all the NBA teams.
@@ -27,6 +29,9 @@ Since these features cannot be implemented by the APIs of dimple.js, we turned b
 
 
 ## Feedback
+
+
+
 
 ## Resources
 - Source of data: [basketball-reference.com](http://basketball-reference.com)
