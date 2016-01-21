@@ -172,16 +172,16 @@ d3.csv("./agg_team_stat.csv", function (d) {
                     .style("left", (d3.select(this).attr("cx")+3).toString() + "px")
                     .style("top", d3.select(this).attr("cy") + 'px');
 
-                d3.select(this)
-                    .attr("class","circle mouseon");
+                //d3.select(this)
+                 //   .attr("class","circle mouseon");
 
             })
             .on("mouseout", function (d) {
                 tooltipDiv.transition()
                     .duration(500)
                     .style("opacity", 0);
-                d3.select(this)
-                    .attr("class","");
+                //d3.select(this)
+                 //   .attr("class","");
             });
 
         fillDataPointColor(datapoint);
@@ -203,25 +203,25 @@ d3.csv("./agg_team_stat.csv", function (d) {
             .attr("x", 0 - (chart_height / 2))
             .attr("dy", "1em")
             .style("text-anchor", "middle")
-            .text(featureName+"[?]")
-            .on("mouseover", function(d){
-
-                tooltipDiv.transition()
-                    .duration(200)
-                    .style("opacity", 1);
-                tooltipDiv.html(yFeatureExp[featureName])
-                   // .style("left", d3.mouse(d3.select("#chartContainer").node())[0])
-                   // .style("top", d3.mouse(d3.select("#chartContainer").node())[1]-300);
-                    .style("left",(50).toString()+"px")
-                    .style("top",(233).toString()+"px");
-            })
-            .on("mouseout",function(d){
-
-                tooltipDiv.transition()
-                    .duration(500)
-                    .style("opacity", 0);
-
-            });
+            .text(featureName+"[?]");
+            //.on("mouseover", function(d){
+            //
+            //    tooltipDiv.transition()
+            //        .duration(200)
+            //        .style("opacity", 1);
+            //    tooltipDiv.html(yFeatureExp[featureName])
+            //       // .style("left", d3.mouse(d3.select("#chartContainer").node())[0])
+            //       // .style("top", d3.mouse(d3.select("#chartContainer").node())[1]-300);
+            //        .style("left",(50).toString()+"px")
+            //        .style("top",(233).toString()+"px");
+            //})
+            //.on("mouseout",function(d){
+            //
+            //    tooltipDiv.transition()
+            //        .duration(500)
+            //        .style("opacity", 0);
+            //
+            //});
 
         // Make x axis on the main chart
         main_chart_g.append("text")
