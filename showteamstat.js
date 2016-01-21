@@ -155,6 +155,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
             .enter()
             .append("circle");
 
+        console.log("start to assign the properties of circles");
 
         var datapoint = d3.selectAll("circle")
             .attr("cx", function (d) {
@@ -192,12 +193,8 @@ d3.csv("./agg_team_stat.csv", function (d) {
         }
 
         // Make y axis on the main chart
-        var yLabelg=main_chart_g.append("g");
 
-        //var yLabelgDiv =d3.select("#chartDiv")
-        //    .append("div")
-        //    .attr("class", "tooltip")
-        //    .style("opacity", 0);
+        console.log("datapoint plotted");
 
         main_chart_g.append("text")
             .attr("id", "ylabel")
@@ -209,8 +206,6 @@ d3.csv("./agg_team_stat.csv", function (d) {
             .text(featureName+"[?]")
             .on("mouseover", function(d){
 
-                console.log("mouseover text");
-                console.log(d3.mouse(yLabelg.node()));
                 tooltipDiv.transition()
                     .duration(200)
                     .style("opacity", 1);
@@ -346,7 +341,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
         else {
             return "btn btn-default";
         }
-    };
+    }
 
 
     var bpBtnGroup = d3.select("#stat-btn-group");
