@@ -15,7 +15,7 @@ This visualization presents some offense statistics of each team from 1990 to 20
 #### V0
 The initial version was made by modifying [this example](http://dimplejs.org/advanced_examples_viewer.html?id=advanced_storyboard_control) provided on dimple.js official website.
 
-<img src="./chart_snapshot/v1snapshot.png" width="70%">
+<img src="./chart_snapshot/v0-snapshot.png" width="70%">
 
 According to the feedback, I want to add the following features:
 
@@ -29,7 +29,7 @@ Improvements in this version:
 - This version allows the users to highlight the teams that they are interested in and compare it with other teams.
 - The users can also select the metrics (3PAPG, 3P, 3P\%) shown on the plot by pressing the red buttons below the chart.
 - The colors of each team are set to be consistent with the color codes of NBA teams.
-<img src="./chart_snapshot/v2snapshot.png" width="70%">
+<img src="./chart_snapshot/v1-snapshot.png" width="70%">
 
 The feedback of this version includs the layout 
 
@@ -40,7 +40,7 @@ Major changes in this version:
 - Replace the red rectangle buttons in V1 by Bootstrap buttons.
 - Add title, background information, and discussions in the figure.
 - Add tooltips for the data points.
-
+<img src="./chart_snapshot/v2-snapshot.png" width="70%">
 
 
 
@@ -49,8 +49,9 @@ Major changes of this version:
 - The background information and explaination are enhanced.
 - A tooltip is added to the y-axis so that users can quickly check the definition of each metrics
 - A new button is placed to let the user show the "League Average".
+- Minor revisions of the layout and texts.
 
-
+<img src="./chart_snapshot/v3-snapshot.png" width="70%">
 
 
 ## Feedback
@@ -66,7 +67,7 @@ Major changes of this version:
 
 
 #### Comments for V2:
-- 
+The original version of comments for this version can be found on [this post](https://discussions.udacity.com/t/project-6-the-evolution-of-three-pointers-in-the-nba/44016) or this [backup version](./feeback_charlie.md).
 
 
 
