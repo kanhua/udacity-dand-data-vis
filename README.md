@@ -12,12 +12,10 @@ In a basketball game, you typically get two points or three points when you shot
 ## Design
 This visualization presents some offense statistics of each team from 1990 to 2016. The users are able to select which team team to plotted on the main chart.
 
-#### First version
+#### V0
 The initial version was made by modifying [this example](http://dimplejs.org/advanced_examples_viewer.html?id=advanced_storyboard_control) provided on dimple.js official website.
 
 <img src="./chart_snapshot/v1snapshot.png" width="70%">
-
-<img src="./chart_snapshot/v2snapshot.png" width="70%>
 
 According to the feedback, I want to add the following features:
 
@@ -26,9 +24,50 @@ According to the feedback, I want to add the following features:
 
 Since these features cannot be implemented by the APIs of dimple.js, we turned back to D3 and started from scratch.
 
+#### V1
+Improvements in this version:
+- This version allows the users to highlight the teams that they are interested in and compare it with other teams.
+- The users can also select the metrics (3PAPG, 3P, 3P\%) shown on the plot by pressing the red buttons below the chart.
+- The colors of each team are set to be consistent with the color codes of NBA teams.
+<img src="./chart_snapshot/v2snapshot.png" width="70%">
+
+The feedback of this version includs the layout 
+
+
+#### V2
+Major changes in this version:
+- Use [Boostrap](http://getbootstrap.com) to rearrange the layout.
+- Replace the red rectangle buttons in V1 by Bootstrap buttons.
+- Add title, background information, and discussions in the figure.
+- Add tooltips for the data points.
+
+
+
+
+#### V3 (the current version)
+Major changes of this version:
+- The background information and explaination are enhanced.
+- A tooltip is added to the y-axis so that users can quickly check the definition of each metrics
+- A new button is placed to let the user show the "League Average".
+
+
 
 
 ## Feedback
+
+#### Comments for V0:
+- It would be good to see how the statics of a single team compared with other teams.=
+- The chart will be more attractive to NBA fans if the colors of each team in the figure can match the color codes of NBA teams.
+
+
+#### Comments for V1:
+- The users need some explainatin of what the metrics 3PAPG, 3PA and 3P represent.
+- The red button below the chart does not look very good. 
+
+
+#### Comments for V2:
+- 
+
 
 
 
