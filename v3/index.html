@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Three-pointer evolution in the NBA</title>
+    <!-- Bootstrap -->
+	<link href="css/bootstrap.css" rel="stylesheet">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+  </head>
+  <style>
+
+
+      .axis text {
+          font: 10px sans-serif;
+      }
+
+      .axis path,
+      .axis line {
+          fill: none;
+          stroke: #000;
+          shape-rendering: crispEdges;
+      }
+
+      circle{
+          stroke-width:1;
+      }
+
+      div.tooltip{
+          position: absolute;
+          text-align: center;
+          width: 70px;
+          height: 28px;
+          padding: 2px;
+          font: 10px sans-serif;
+          background: lightsteelblue;
+          border:0px;
+          border-radius: 8px;
+          pointer-events: none;
+
+
+
+      }
+
+
+  </style>
+  <body>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+	<script src="js/jquery-1.11.3.min.js"></script>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed --> 
+	<script src="js/bootstrap.js"></script>
+    
+ 
+  <div class="container">
+  	<div class="row">
+    <div class="col-md-12" class=title">
+    <h2>The evolution of three-point shots in the NBA</h2>
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-md-8">
+            <p>In basketball games, a team earned three points if the a successful shot is made behind the three-point arc, which is typically 23 feet from the hoop. If a successful shot is made within the three-point arc, the team earned two-points instead. Modern NBA teams rely more and more three-point shots in their offense. The aim of this visualization is to demonstrate this trend.</p>
+        <p>Source <a href="http://basketball-reference.com">basketball-reference.com</a> </p>
+    </div>
+    <div class="col-md-4" >
+    Click below buttons to highlight the teams you want to explore
+    </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-8">
+
+          <div class="row" id="chartDiv">
+          
+              <svg id="chartContainer"></svg>
+          
+          </div>
+
+        <div class="row">
+          
+            <!-- the example codes of bootstrap buttons
+          <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default">Button 1</button>
+                <button type="button" class="btn btn-default disabled">Disabled Button</button>
+                <button type="button" class="btn btn-default active">Active Button</button>
+          </div>
+          !-->
+            <div id="stat-btn-group" class="btn-group" role="group">
+            </div>
+          </div>
+
+      </div>
+      <div class="col-md-4">
+          <svg id="teamButtonContainer"></svg>
+      </div>
+    </div>
+    <div class="row">
+    <p>3PAPG: averaged three-pointer attempted per game</p>
+    <p>3PA: total three-point shots attemped during the season</p>
+    <p>3P: total three-point shots made during the season</p>
+        <p>3P%: shot percentage through out the year</p>
+        <p>Remarks and obervations</p>
+        <ol>
+            <li>
+               The NBA teams shoots more and more three-pointer. The median of 3PAPG increased almost three times during the span of 1990 to 2016.
+            </li>
+
+            <li>
+                The small spike of 3PAPG during 1995 and 1997 is due to that the three point line was shortened to 22 feet, but it was restored to its original setting since 1998.
+            </li>
+
+            <li>
+                Although the three point shots dramatically increase, the shot percentage remains stable.
+                This indicates that the most the NBA team are very disciplined in attempting their three-point shots.
+
+            </li>
+
+        </ol>
+
+    
+    </div>
+  </div>
+  </body>
+  <script src="//d3js.org/d3.v3.min.js"></script>
+  <script src="team_color_code.js"></script>
+<script src="show_team_stat.js"></script>
+
+
+</html>
