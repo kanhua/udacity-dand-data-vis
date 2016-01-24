@@ -4,8 +4,8 @@
  */
 
 
-function getFeature(d, feature_name) {
-    return d[feature_name];
+function getFeature(d, featureName) {
+    return d[featureName];
 }
 
 d3.csv("./agg_team_stat.csv", function (d) {
@@ -25,10 +25,10 @@ d3.csv("./agg_team_stat.csv", function (d) {
         chartWidth = svgWidth - margin.left,
         chartHeight = svgHeight - margin.right,
         labelWidth = 170,
-        label_height = svgHeight;
+        labelHeight = svgHeight;
 
 
-    var main_chart_g = d3.select("#chartContainer")
+    var mainChartG = d3.select("#chartContainer")
         .attr("width", svgWidth)
         .attr("height", svgHeight)
         .append("g")
@@ -38,10 +38,14 @@ d3.csv("./agg_team_stat.csv", function (d) {
     var highlightTeam = [];
     var currentFeature = "3PAPG";
 
+    var dataPointDefaultColor="grey";
+
     var tooltipDiv = d3.select("#chartDiv")
         .append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
+
+
 
 
     function getFillColor(d) {
@@ -50,7 +54,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
             return teamCode[d["Team"]]["color1"];
         }
         else {
-            return "grey";
+            return dataPointDefaultColor;
         }
     }
 
@@ -61,7 +65,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
             return teamCode[d["Team"]]["color2"];
         }
         else {
-            return "grey";
+            return dataPointDefaultColor;
         }
     }
 
@@ -84,7 +88,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
     }
 
     // a flag that determines whether the elements have already drawed
-    var data_drawed = false;
+    var dataDrawed = false;
 
     function drawMainChart(featureName) {
 
@@ -98,7 +102,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
             })]);
 
 
-        var y_scale = d3.scale.linear()
+        var yScale = d3.scale.linear()
             .range([chartHeight, margin.top])
             .domain([0, d3.max(data, function (d) {
                 return getFeature(d, featureName);
@@ -106,33 +110,33 @@ d3.csv("./agg_team_stat.csv", function (d) {
             ]);
 
 
-        var x_axis = d3.svg.axis()
+        var xAxis = d3.svg.axis()
             .scale(xScale)
             .orient("bottom")
             .tickFormat(d3.format("{:}"));
 
 
-        var y_axis = d3.svg.axis()
-            .scale(y_scale)
+        var yAxis = d3.svg.axis()
+            .scale(yScale)
             .orient("left");
 
-
-        if (!data_drawed) {
+        // Make x-axis on the chart
+        if (!dataDrawed) {
             d3.select("#chartContainer")
                 .append("g")
                 .attr("class", "x axis")
                 .attr("transform", "translate(0," + chartHeight + ")")
-                .call(x_axis);
+                .call(xAxis);
         }
 
 
-        if (!data_drawed) {
+        if (!dataDrawed) {
 
             d3.select("#chartContainer")
                 .append("g")
                 .attr("class", "y axis")
                 .attr("transform", "translate(" + margin.left + ",0)")
-                .call(y_axis);
+                .call(yAxis);
         }
         else {
             d3.select("#chartContainer").select(".y.axis").remove();
@@ -141,7 +145,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
                 .append("g")
                 .attr("class", "y axis")
                 .attr("transform", "translate(" + margin.left + ",0)")
-                .call(y_axis);
+                .call(yAxis);
 
         }
 
@@ -152,14 +156,13 @@ d3.csv("./agg_team_stat.csv", function (d) {
             .enter()
             .append("circle");
 
-        console.log("start to assign the properties of circles");
 
         var datapoint = d3.selectAll("circle")
             .attr("cx", function (d) {
                 return xScale(d["year"]);
             })
             .attr("cy", function (d) {
-                return y_scale(d[featureName]);
+                return yScale(d[featureName]);
             })
             .attr("r", 8)
             .attr("stroke-width", 2)
@@ -176,7 +179,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
                     .attr("opacity", 0.8);
 
             })
-            .on("mouseout", function (d) {
+            .on("mouseout", function () {
                 tooltipDiv.transition()
                     .duration(500)
                     .attr("opacity", 0);
@@ -189,16 +192,14 @@ d3.csv("./agg_team_stat.csv", function (d) {
         fillDataPointColor(datapoint);
 
 
-        if (data_drawed) {
-            main_chart_g.select("#ylabel").remove();
-            main_chart_g.select("#xlabel").remove();
+        if (dataDrawed) {
+            mainChartG.select("#ylabel").remove();
+            mainChartG.select("#xlabel").remove();
         }
 
         // Make y axis on the main chart
 
-        console.log("datapoint plotted");
-
-        main_chart_g.append("text")
+        mainChartG.append("text")
             .attr("id", "ylabel")
             .attr("transform", "rotate(-90)")
             .attr("y", 25)
@@ -206,7 +207,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
             .attr("dy", "1em")
             .style("text-anchor", "middle")
             .text(featureName + "[?]")
-            .on("mouseover", function (d) {
+            .on("mouseover", function () {
 
                 tooltipDiv.transition()
                     .duration(200)
@@ -217,7 +218,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
                     .style("left", (50).toString() + "px")
                     .style("top", (233).toString() + "px");
             })
-            .on("mouseout", function (d) {
+            .on("mouseout", function () {
 
                 tooltipDiv.transition()
                     .duration(500)
@@ -226,7 +227,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
             });
 
         // Make x axis on the main chart
-        main_chart_g.append("text")
+        mainChartG.append("text")
             .attr("id", "xlabel")
             .attr("y", chartHeight + 20)
             .attr("x", (chartWidth / 2))
@@ -235,7 +236,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
             .text("season");
 
 
-        data_drawed = true;
+        dataDrawed = true;
         return datapoint;
     }
 
@@ -245,17 +246,20 @@ d3.csv("./agg_team_stat.csv", function (d) {
     var barHeight = 20,
         barWidth = 160;
 
-    var team_name = data.map(function (d) {
+    var teamName = data.map(function (d) {
         return d["Team"];
     });
 
-    team_name = d3.set(team_name);
-    team_name.remove("League Average");
-    team_name = team_name.values();
+    teamName = d3.set(teamName);
+    teamName.remove("League Average");
+    teamName = teamName.values();
 
-    var chart_svgg = d3.select("#teamButtonContainer")
+
+    // Plot the team-name rectangles on the left-hand side
+
+    var chartSvgG = d3.select("#teamButtonContainer")
         .attr("width", labelWidth)
-        .attr("height", label_height);
+        .attr("height", labelHeight);
 
 
     function fillBarColor(bd, bar) {
@@ -279,8 +283,8 @@ d3.csv("./agg_team_stat.csv", function (d) {
     }
 
 
-    var bar = chart_svgg.selectAll("g")
-        .data(team_name)
+    var bar = chartSvgG.selectAll("g")
+        .data(teamName)
         .enter()
         .append("g")
         .attr("transform", function (d, i) {
@@ -366,15 +370,30 @@ d3.csv("./agg_team_stat.csv", function (d) {
                 .attr("class", updateButtonStatus);
         });
 
-    var lavgButton = d3.select("#lavg");
-    lavgButton.on("click", function (d) {
+    var lavgButton = d3.select("#lavg")
+        .attr("class", "btn btn-default active")
+        .text("Hide League Average");
+
+    /* Set default style of the button
+    The "League Average" is highlighted when the chart is loaded.
+     */
+
+    highlightTeam.push("League Average");
+
+    fillDataPointColor(datapoint);
+
+
+
+
+    function setlavgButtonStyle(){
 
         if (lavgButton.attr("class") == "btn btn-default") {
             highlightTeam.push("League Average");
 
             fillDataPointColor(datapoint);
 
-            lavgButton.attr("class", "btn btn-default active");
+            lavgButton.attr("class", "btn btn-default active")
+                .text("Hide League Average");
 
         }
         else if (lavgButton.attr("class") == "btn btn-default active") {
@@ -383,12 +402,15 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
             fillDataPointColor(datapoint);
 
-            lavgButton.attr("class", "btn btn-default");
+            lavgButton.attr("class", "btn btn-default")
+                .text("Show League Average");
 
         }
 
 
-    });
+    };
+
+    lavgButton.on("click", setlavgButtonStyle);
 
 
 });

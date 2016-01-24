@@ -84,6 +84,7 @@ Although the definitions of the y labels are provided in the bottom of the figur
 The color of Utah Jazz is too dark. | The color code of Utah Jazz is updated.
 It would be interesting to see the mean or median values.| A new button that shows the mean values is added.
 Questions about the data: What happened to 3PA and 3P in 1999 and 2016? | The reason is provided in "remarks" session.
+Using grey as the default color of the data points makes the chart looks depressing.|
 
 
 
