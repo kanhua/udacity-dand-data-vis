@@ -1,4 +1,4 @@
-team_code = {
+teamCode = {
     "League Average": {"color1": "red", "color2": "purple"},
     "Denver Nuggets": {"color2": "#4FA8FF", "color1": "#FFB20F"},
     "Portland Trail Blazers": {"color2": "#B6BFBF", "color1": "#F0163A"},

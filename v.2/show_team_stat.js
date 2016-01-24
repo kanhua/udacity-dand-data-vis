@@ -50,7 +50,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
     function getFillColor(d) {
         if (highlightTeam.indexOf(d["Team"]) >= 0) {
 
-            return team_code[d["Team"]]["color1"];
+            return teamCode[d["Team"]]["color1"];
         }
         else {
             return "grey";
@@ -61,7 +61,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
         if (highlightTeam.indexOf(d["Team"]) >= 0) {
 
-            return team_code[d["Team"]]["color2"];
+            return teamCode[d["Team"]]["color2"];
         }
         else {
             return "grey";
@@ -240,16 +240,16 @@ d3.csv("./agg_team_stat.csv", function (d) {
                 .attr("fill", "white");
             d3.select(bar)
                 .select("text")
-                .attr("fill", team_code[bd]["color1"]);
+                .attr("fill", teamCode[bd]["color1"]);
 
         }
         else {
             d3.select(bar)
                 .select("rect")
-                .attr("fill", team_code[bd]["color1"]);
+                .attr("fill", teamCode[bd]["color1"]);
             d3.select(bar)
                 .select("text")
-                .attr("fill", team_code[bd]["color2"]);
+                .attr("fill", teamCode[bd]["color2"]);
         }
     }
 
@@ -284,14 +284,14 @@ d3.csv("./agg_team_stat.csv", function (d) {
         .attr("height", barHeight - 4)
         .attr("fill", function (d) {
             if (highlightTeam.indexOf(d) >= 0) {
-                return team_code[d]["color1"];
+                return teamCode[d]["color1"];
             }
             else {
                 return "white";
             }
         })
         .attr("stroke", function (d) {
-            return team_code[d]["color2"];
+            return teamCode[d]["color2"];
         })
         .attr("stroke-width", 1);
 
@@ -301,7 +301,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
         .attr("y", barHeight / 2)
         .attr("dy", ".35em")
         .attr("fill", function (d) {
-            return team_code[d]["color1"];
+            return teamCode[d]["color1"];
         })
         .text(function (d) {
             return d;

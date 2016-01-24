@@ -20,19 +20,17 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
 
     var margin = {"top": 15, "bottom": 25, "left": 75, "right": 75},
-        svg_width = 700,
-        svg_height = 600,
-        chart_width = svg_width - margin.left,
-        chart_height = svg_height - margin.right,
-        label_width = 170;
-    y_stat_start = 0;
-    label_height = svg_height;
-
+        svgWidth = 700,
+        svgHeight = 600,
+        chartWidth = svgWidth - margin.left,
+        chartHeight = svgHeight - margin.right,
+        labelWidth = 170,
+        label_height = svgHeight;
 
 
     var main_chart_g = d3.select("#chartContainer")
-        .attr("width", svg_width)
-        .attr("height", svg_height)
+        .attr("width", svgWidth)
+        .attr("height", svgHeight)
         .append("g")
         .attr('class', 'chart');
 
@@ -49,7 +47,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
     function getFillColor(d) {
         if (highlightTeam.indexOf(d["Team"]) >= 0) {
 
-            return team_code[d["Team"]]["color1"];
+            return teamCode[d["Team"]]["color1"];
         }
         else {
             return "grey";
@@ -60,7 +58,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
         if (highlightTeam.indexOf(d["Team"]) >= 0) {
 
-            return team_code[d["Team"]]["color2"];
+            return teamCode[d["Team"]]["color2"];
         }
         else {
             return "grey";
@@ -91,9 +89,8 @@ d3.csv("./agg_team_stat.csv", function (d) {
     function drawMainChart(featureName) {
 
 
-
-        var x_scale = d3.scale.linear()
-            .range([margin.left, chart_width])
+        var xScale = d3.scale.linear()
+            .range([margin.left, chartWidth])
             .domain([d3.min(data, function (d) {
                 return getFeature(d, "year");
             }), d3.max(data, function (d) {
@@ -102,7 +99,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
 
         var y_scale = d3.scale.linear()
-            .range([chart_height, margin.top])
+            .range([chartHeight, margin.top])
             .domain([0, d3.max(data, function (d) {
                 return getFeature(d, featureName);
             })
@@ -110,7 +107,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
 
         var x_axis = d3.svg.axis()
-            .scale(x_scale)
+            .scale(xScale)
             .orient("bottom")
             .tickFormat(d3.format("{:}"));
 
@@ -124,7 +121,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
             d3.select("#chartContainer")
                 .append("g")
                 .attr("class", "x axis")
-                .attr("transform", "translate(0," + chart_height + ")")
+                .attr("transform", "translate(0," + chartHeight + ")")
                 .call(x_axis);
         }
 
@@ -159,24 +156,24 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
         var datapoint = d3.selectAll("circle")
             .attr("cx", function (d) {
-                return x_scale(d["year"]);
+                return xScale(d["year"]);
             })
             .attr("cy", function (d) {
                 return y_scale(d[featureName]);
             })
-            .attr("r",8)
-            .attr("stroke-width",2)
+            .attr("r", 8)
+            .attr("stroke-width", 2)
             .on("mouseover", function (d) {
                 tooltipDiv.transition()
                     .duration(200)
                     .style("opacity", 0.8);
                 tooltipDiv.html("season:" + d["year"] + "</br>" + "Team:" + d["Team"])
-                    .style("left", (d3.select(this).attr("cx")+3).toString() + "px")
+                    .style("left", (d3.select(this).attr("cx") + 3).toString() + "px")
                     .style("top", d3.select(this).attr("cy") + 'px');
 
                 d3.select(this)
-                    .attr("r",10)
-                    .attr("opacity",0.8);
+                    .attr("r", 10)
+                    .attr("opacity", 0.8);
 
             })
             .on("mouseout", function (d) {
@@ -185,8 +182,8 @@ d3.csv("./agg_team_stat.csv", function (d) {
                     .attr("opacity", 0);
 
                 d3.select(this)
-                    .attr("opacity",0.2)
-                    .attr("r",8)
+                    .attr("opacity", 0.2)
+                    .attr("r", 8)
             });
 
         fillDataPointColor(datapoint);
@@ -205,22 +202,22 @@ d3.csv("./agg_team_stat.csv", function (d) {
             .attr("id", "ylabel")
             .attr("transform", "rotate(-90)")
             .attr("y", 25)
-            .attr("x", 0 - (chart_height / 2))
+            .attr("x", 0 - (chartHeight / 2))
             .attr("dy", "1em")
             .style("text-anchor", "middle")
-            .text(featureName+"[?]")
-            .on("mouseover", function(d){
+            .text(featureName + "[?]")
+            .on("mouseover", function (d) {
 
                 tooltipDiv.transition()
                     .duration(200)
                     .style("opacity", 1);
                 tooltipDiv.html(yFeatureExp[featureName])
-                   // .style("left", d3.mouse(d3.select("#chartContainer").node())[0])
-                   // .style("top", d3.mouse(d3.select("#chartContainer").node())[1]-300);
-                    .style("left",(50).toString()+"px")
-                    .style("top",(233).toString()+"px");
+                    // .style("left", d3.mouse(d3.select("#chartContainer").node())[0])
+                    // .style("top", d3.mouse(d3.select("#chartContainer").node())[1]-300);
+                    .style("left", (50).toString() + "px")
+                    .style("top", (233).toString() + "px");
             })
-            .on("mouseout",function(d){
+            .on("mouseout", function (d) {
 
                 tooltipDiv.transition()
                     .duration(500)
@@ -231,8 +228,8 @@ d3.csv("./agg_team_stat.csv", function (d) {
         // Make x axis on the main chart
         main_chart_g.append("text")
             .attr("id", "xlabel")
-            .attr("y", chart_height + 20)
-            .attr("x", (chart_width / 2))
+            .attr("y", chartHeight + 20)
+            .attr("x", (chartWidth / 2))
             .attr("dy", "1em")
             .style("text-anchor", "middle")
             .text("season");
@@ -257,7 +254,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
     team_name = team_name.values();
 
     var chart_svgg = d3.select("#teamButtonContainer")
-        .attr("width", label_width)
+        .attr("width", labelWidth)
         .attr("height", label_height);
 
 
@@ -268,16 +265,16 @@ d3.csv("./agg_team_stat.csv", function (d) {
                 .attr("fill", "white");
             d3.select(bar)
                 .select("text")
-                .attr("fill", team_code[bd]["color1"]);
+                .attr("fill", teamCode[bd]["color1"]);
 
         }
         else {
             d3.select(bar)
                 .select("rect")
-                .attr("fill", team_code[bd]["color1"]);
+                .attr("fill", teamCode[bd]["color1"]);
             d3.select(bar)
                 .select("text")
-                .attr("fill", team_code[bd]["color2"]);
+                .attr("fill", teamCode[bd]["color2"]);
         }
     }
 
@@ -312,14 +309,14 @@ d3.csv("./agg_team_stat.csv", function (d) {
         .attr("height", barHeight - 4)
         .attr("fill", function (d) {
             if (highlightTeam.indexOf(d) >= 0) {
-                return team_code[d]["color1"];
+                return teamCode[d]["color1"];
             }
             else {
                 return "white";
             }
         })
         .attr("stroke", function (d) {
-            return team_code[d]["color2"];
+            return teamCode[d]["color2"];
         })
         .attr("stroke-width", 1);
 
@@ -329,7 +326,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
         .attr("y", barHeight / 2)
         .attr("dy", ".35em")
         .attr("fill", function (d) {
-            return team_code[d]["color1"];
+            return teamCode[d]["color1"];
         })
         .text(function (d) {
             return d;
@@ -372,26 +369,23 @@ d3.csv("./agg_team_stat.csv", function (d) {
     var lavgButton = d3.select("#lavg");
     lavgButton.on("click", function (d) {
 
-        if (lavgButton.attr("class")=="btn btn-default")
-        {
+        if (lavgButton.attr("class") == "btn btn-default") {
             highlightTeam.push("League Average");
 
             fillDataPointColor(datapoint);
 
-            lavgButton.attr("class","btn btn-default active");
+            lavgButton.attr("class", "btn btn-default active");
 
         }
-        else if (lavgButton.attr("class")=="btn btn-default active")
-        {
+        else if (lavgButton.attr("class") == "btn btn-default active") {
             highlightTeam.splice(highlightTeam.indexOf("League Average"));
 
 
             fillDataPointColor(datapoint);
 
-            lavgButton.attr("class","btn btn-default");
+            lavgButton.attr("class", "btn btn-default");
 
         }
-
 
 
     });
