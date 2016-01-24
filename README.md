@@ -67,7 +67,10 @@ Major changes of this version:
 
 
 #### Comments for V2:
-The original version of comments for this version can be found on [this post](https://discussions.udacity.com/t/project-6-the-evolution-of-three-pointers-in-the-nba/44016) or this [backup version](./feeback_charlie.md).
+The original version of comments for this version can be found on [this post](https://discussions.udacity.com/t/project-6-the-evolution-of-three-pointers-in-the-nba/44016) or this [backup version](./feedback_charlie.md).
+
+- Summary of this comment:
+	-  
 
 
 
