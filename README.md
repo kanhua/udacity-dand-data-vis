@@ -48,7 +48,7 @@ Major changes in this version:
 Major changes of this version:
 - The background information and explanation are enhanced.
 - A tooltip is added to the y-axis so that users can quickly check the definition of each metrics
-- A new button is placed to let the user show the "League Average".
+- A new button is placed to let the reader show the "League Average".
 - Minor revisions of the layout and texts.
 
 <img src="./chart_snapshot/v3-snapshot.png" width="70%">
@@ -84,7 +84,7 @@ Although the definitions of the y labels are provided in the bottom of the figur
 The color of Utah Jazz is too dark. | The color code of Utah Jazz is updated.
 It would be interesting to see the mean or median values.| A new button that shows the mean values is added.
 Questions about the data: What happened to 3PA and 3P in 1999 and 2016? | The reason is provided in "remarks" session.
-Using grey as the default color of the data points makes the chart looks depressing.|
+Using grey as the default color of the data points makes the chart looks depressing.| The new version keeps grey as the default color but adds colored "league average", so the reader's can be better guided.
 
 
 
