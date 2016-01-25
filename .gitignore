@@ -1,3 +1,6 @@
 .ipynb_checkpoints/
 .DS_Store/
 .git/
+nba_team_data/
+full_agg_team_stat.csv
+explore NBA 3P stat.ipynb

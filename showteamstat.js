@@ -213,10 +213,8 @@ d3.csv("./agg_team_stat.csv", function (d) {
                     .duration(200)
                     .style("opacity", 1);
                 tooltipDiv.html(yFeatureExp[featureName])
-                    // .style("left", d3.mouse(d3.select("#chartContainer").node())[0])
-                    // .style("top", d3.mouse(d3.select("#chartContainer").node())[1]-300);
-                    .style("left", (50).toString() + "px")
-                    .style("top", (233).toString() + "px");
+                    .style("left", "50"+ "px")
+                    .style("top", "233" + "px");
             })
             .on("mouseout", function () {
 
@@ -382,9 +380,6 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
     fillDataPointColor(datapoint);
 
-
-
-
     function setlavgButtonStyle(){
 
         if (lavgButton.attr("class") == "btn btn-default") {
@@ -407,8 +402,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
         }
 
-
-    };
+    }
 
     lavgButton.on("click", setlavgButtonStyle);
 
