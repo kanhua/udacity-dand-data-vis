@@ -4,13 +4,24 @@ Visualization page: [http://kanhua.github.io/udacity-dand-data-vis/](http://kanh
 
 ## Summary
 Basketball fans may be aware that NBA teams are shooting more and more three-point field goals. 
-The project aims to visualize the trend the evolution of three-pointers in the NBA. This visualization allows users to explore and compare a number of 3-pointer statistics of each NBA team since 1990. 
+The project aims to visualize the evolution of three-pointers in the NBA. 
+This visualization allows readers to explore and compare a number of 3-pointer statistics of each NBA team since 1990. 
 
 #### Background information
-In a basketball game, you typically get two points or three points when you shot the ball into the hoop, which is called as a "field goal". You can get three points if you shot behind the three-point line, which is around 23 feet from the hoop. The history and evolution of three-point lines can be found in this [wiki article](https://en.wikipedia.org/wiki/Three-point_field_goal).
+#### Three-point field goals
+In basketball games, a team earned three points if the a successful shot is made behind the three-point arc by the player,
+which is typically 23 feet from the hoop. If a successful shot is made within the three-point arc,
+the team earned two-points instead. In a round of offense, a team can choose to make a two-point shot or three-point shot.
+            
+##### Should you take the risk and shoot the three-pointer?
+In short, the dilemma that the basketball players are facing is:
+should you take greater risk, shoot the ball further from the basket that potentially gives you three points? 
+or should you shoot the ball near the basket but only get two points?
 
 ## Design
-This visualization presents some offense statistics of each team from 1990 to 2016. The users are able to select which team team to plotted on the main chart.
+Since we would like to investigate how the team statistics related to three-point field goals evolves with time, a X-Y scatter plot serves this purpose well.
+Also, assigning different colors to each time at once makes the plot very busy. Instead, we let the readers to select the teams that they want to highlight. The readers are also able to select which statisitics to show.
+
 
 #### V0
 The initial version was made by modifying [this example](http://dimplejs.org/advanced_examples_viewer.html?id=advanced_storyboard_control) provided on dimple.js official website.
@@ -26,8 +37,8 @@ Since these features cannot be implemented by the APIs of dimple.js, we turned b
 
 #### V1
 Improvements in this version:
-- This version allows the users to highlight the teams that they are interested in and compare it with other teams.
-- The users can also select the metrics (3PAPG, 3PA, 3P,3P%) shown on the plot by pressing the red buttons below the chart.
+- This version allows the readers to highlight the teams that they are interested in and compare it with other teams.
+- The readers can also select the statistics (3PAPG, 3PA, 3P,3P%) shown on the plot by pressing the red buttons below the chart.
 - The colors of each team are set to be consistent with the color codes of NBA teams.
 
 <img src="./chart_snapshot/v1-snapshot.png" width="70%">
@@ -47,7 +58,7 @@ Major changes in this version:
 #### V3 (the current version)
 Major changes of this version:
 - The background information and explanation are enhanced.
-- A tooltip is added to the y-axis so that users can quickly check the definition of each metrics
+- A tooltip is added to the y-axis so that readers can quickly check the definition of each statistics.
 - A new button is placed to let the reader show the "League Average".
 - Minor revisions of the layout and texts.
 
@@ -68,7 +79,7 @@ The chart will be more attractive to NBA fans if the colors of each team in the 
 
 Comments|Responses
 --------|--------
-The users need some explanation of what the metrics 3PAPG, 3PA and 3P represent|Explanations and background information are added in this version.
+The readers need some explanation of what 3PAPG, 3PA and 3P represent|Explanations and background information are added in this version.
 The red button below the chart does not look very good.| The red rectangles are replaced by buttons.
 
 
@@ -85,8 +96,6 @@ The color of Utah Jazz is too dark. | The color code of Utah Jazz is updated.
 It would be interesting to see the mean or median values.| A new button that shows the mean values is added.
 Questions about the data: What happened to 3PA and 3P in 1999 and 2016? | The reason is provided in "remarks" session.
 Using grey as the default color of the data points makes the chart looks depressing.| The new version keeps grey as the default color but adds colored "league average", so the reader's can be better guided.
-
-
 
 
 
