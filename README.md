@@ -3,15 +3,13 @@
 Visualization page: [http://kanhua.github.io/udacity-dand-data-vis/](http://kanhua.github.io/udacity-dand-data-vis/)
 
 ## Summary
-Basketball fans may be aware that NBA teams are shooting more and more three-point field goals. 
-The project aims to visualize the evolution of three-pointers in the NBA. 
-This visualization allows readers to explore and compare a number of 3-pointer statistics of each NBA team since 1990. 
+Basketball fans may be aware that NBA teams are shooting more and more three-point field goals. The project aims to visualize the evolution of three-pointers in the NBA. This visualization allows readers to explore and compare several three-pointer statistics of each NBA team since 1990. 
 
 #### Background information
 #### Three-point field goals
 In basketball games, a team earned three points if the a successful shot is made behind the three-point arc by the player,
-which is typically 23 feet from the hoop. If a successful shot is made within the three-point arc,
-the team earned two-points instead. In a round of offense, a team can choose to make a two-point shot or three-point shot.
+which is typically 23 feet from the hoop. If a successful shot is made inside the three-point arc,
+the team earned two-points instead. For every offense opportunity, a team can choose to make a two-point shot or three-point shot.
             
 ##### Should you take the risk and shoot the three-pointer?
 In short, the dilemma that the basketball players are facing is:
@@ -20,7 +18,7 @@ or should you shoot the ball near the basket but only get two points?
 
 ## Design
 Since we would like to investigate how the team statistics related to three-point field goals evolves with time, a X-Y scatter plot serves this purpose well.
-Also, assigning different colors to each time at once makes the plot very busy. Instead, we let the readers to select the teams that they want to highlight. The readers are also able to select which statisitics to show.
+Also, assigning different colors to each time at once makes the plot very busy. Instead, we let the readers select the teams that they want to highlight. The readers are also able to select which statistics to show.
 
 
 #### V0
@@ -28,15 +26,10 @@ The initial version was made by modifying [this example](http://dimplejs.org/adv
 
 <img src="./chart_snapshot/v0-snapshot.png" width="70%">
 
-According to the feedback, I want to add the following features:
-
-1. The statstics of the selected team can be compared with all the NBA teams.
-2. The color codes of each team can be consistent to the NBA teams. 
-
-Since these features cannot be implemented by the APIs of dimple.js, we turned back to D3 and started from scratch.
 
 #### V1
-Improvements in this version:
+Major changes in this version:
+- Instead of using dimple.js, this version were rewritten by just using D3.
 - This version allows the readers to highlight the teams that they are interested in and compare it with other teams.
 - The readers can also select the statistics (3PAPG, 3PA, 3P,3P%) shown on the plot by pressing the red buttons below the chart.
 - The colors of each team are set to be consistent with the color codes of NBA teams.
@@ -57,7 +50,7 @@ Major changes in this version:
 
 #### V3 (the current version)
 Major changes of this version:
-- The background information and explanation are enhanced.
+- The background information and explanations are enhanced.
 - A tooltip is added to the y-axis so that readers can quickly check the definition of each statistics.
 - A new button is placed to let the reader show the "League Average".
 - Minor revisions of the layout and texts.
@@ -69,6 +62,8 @@ Major changes of this version:
 
 #### Comments for V0:
 
+(Oral communication with reviewer #1)
+
 Comments|Responses
 --------|---------
 It would be good to see how the statics of a single team compared with other teams.| This was implemented in the next version.
@@ -76,6 +71,8 @@ The chart will be more attractive to NBA fans if the colors of each team in the 
 
 
 #### Comments for V1:
+
+(Oral communication with reviewer #2)
 
 Comments|Responses
 --------|--------
@@ -88,13 +85,13 @@ The original version of comments for this version can be found on [this post](ht
 
 Comments | Responses
 ---------|---------
-The meaning of the four statistis are not clear.| These information were rewritten to make it clearer.
+The meaning of the four statistics are not clear.| These information were rewritten to make it clearer.
 The provided background information and explanation is not sufficient for some who are not familiar NBA or basketball. Also, the motivation of presenting this study is not clear.| More background information is added in the page.
-The tooltip on the datapoint are not very useful | I think the tooltip is still useful for knowing which teams are the outliers, so I decide to keep it. 
+The tooltip on the data point are not very useful | I think the tooltip is still useful for knowing which teams are the outliers, so I decide to keep it. 
 Although the definitions of the y labels are provided in the bottom of the figure, it would increase readability if these definitions can be put directly on the chart| A tooptip is added onto the y label, allowing the reader to see the definition of y label without scrolling down the page.
 The color of Utah Jazz is too dark. | The color code of Utah Jazz is updated.
 It would be interesting to see the mean or median values.| A new button that shows the mean values is added.
-Questions about the data: What happened to 3PA and 3P in 1999 and 2016? | The reason is provided in "remarks" session.
+Questions about the data: What happened to 3PA and 3P in 1999 and 2016? | The reason is provided in "remarks" section.
 Using grey as the default color of the data points makes the chart looks depressing.| The new version keeps grey as the default color but adds colored "league average", so the reader's can be better guided.
 
 
