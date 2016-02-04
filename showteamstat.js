@@ -4,9 +4,7 @@
  */
 
 
-function getFeature(d, featureName) {
-    return d[featureName];
-}
+
 
 /* Main function that draws the main chart,
  *  team labels, and y-axis selector buttons
@@ -133,10 +131,9 @@ d3.csv("./agg_team_stat.csv", function (d) {
     }
 
 
-
     /**
      * Draw the main chart
-     * @param the feature (y-axis), e.g. 3PAPG, 3P etc., to be drawn on the figure
+     * @param featureName the feature (y-axis), e.g. 3PAPG, 3P etc., to be drawn on the figure
      * @returns {*} the selector of all data circles
      */
     function drawMainChart(featureName) {
@@ -146,16 +143,16 @@ d3.csv("./agg_team_stat.csv", function (d) {
         var xScale = d3.scale.linear()
             .range([margin.left, chartWidth])
             .domain([d3.min(data, function (d) {
-                return getFeature(d, "year");
+                return d["year"];
             }), d3.max(data, function (d) {
-                return getFeature(d, "year");
+                return d["year"];
             })]);
 
 
         var yScale = d3.scale.linear()
             .range([chartHeight, margin.top])
             .domain([0, d3.max(data, function (d) {
-                return getFeature(d, featureName);
+                return d[featureName];
             })
             ]);
 
@@ -324,7 +321,12 @@ d3.csv("./agg_team_stat.csv", function (d) {
         .attr("height", labelHeight);
 
 
-    // Set the color of team label rectangles
+
+    /**
+     * update the color of the team label rectangle
+     * @param bd: the name of the team
+     * @param bar: the team label object
+     */
     function fillBarColor(bd, bar) {
         if (highlightTeam.indexOf(bd) < 0) {
 
@@ -414,9 +416,12 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
 
 
-    /* Set the behavious of button in the bottom of the chart
-    * (the button that selects the which feature to show on the main chart)
-    */
+
+    /** Set the status of button in the bottom of the chart based on currentFeature
+     * (the button that selects the which feature to show on the main chart)
+     * @param d the datum
+     * @returns {string} the style of the button
+     */
     function updateButtonStatus(d) {
         if (d == currentFeature) {
             return "btn btn-default active";
@@ -456,15 +461,18 @@ d3.csv("./agg_team_stat.csv", function (d) {
     /* Set default style of the button
     * The "League Average" is highlighted when the chart is loaded.
      */
-
     highlightTeam.push("League Average");
 
     // The color of the data points need to be updated
     // because we just added "League Average" into highlightTeam
     fillDataPointColor(datapoint);
 
-    /*Set the style of "League Average" button based on
-    whether it is already clicked or not*/
+
+
+    /**
+     * A callback function when clicking "League Average" button.
+     * It changes the status of the button and highlight the "League Average" data points.
+     */
     function setlavgButtonStyle(){
 
         if (lavgButton.attr("class") == "btn btn-default") {
