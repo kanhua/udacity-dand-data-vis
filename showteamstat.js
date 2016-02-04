@@ -19,6 +19,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
 }, function (data) {
 
 
+    // Define the dimension parameters of the chart
     var margin = {"top": 15, "bottom": 25, "left": 75, "right": 75},
         svgWidth = 700,
         svgHeight = 600,
@@ -28,6 +29,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
         labelHeight = svgHeight;
 
 
+    // Initialize the "g" element for the main chart
     var mainChartG = d3.select("#chartContainer")
         .attr("width", svgWidth)
         .attr("height", svgHeight)
@@ -35,11 +37,26 @@ d3.csv("./agg_team_stat.csv", function (d) {
         .attr('class', 'chart');
 
 
+    // a flag that records whether the elements have already drawed
+    var dataDrawed = false;
+
+
+    // the array that maintains the teams to be highlighted on the chart
     var highlightTeam = [];
+
+
+    // Place the buttons for selecting different statistics
+    var yFeatures = ["3PAPG", "3PA", "3P", "3P%"];
+
+    /*
+    * The feature that currently shows on the main chart.
+    * The default is "3PAPG
+    * */
     var currentFeature = "3PAPG";
 
     var dataPointDefaultColor="grey";
 
+    // Initialize the properties of tooltips for the data points
     var tooltipDiv = d3.select("#chartDiv")
         .append("div")
         .attr("class", "tooltip")
@@ -47,7 +64,10 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
 
 
-
+    /*
+    * getFillColor(), getStrokeColor() and getOpacity() adjusts the
+    * color properties of data point
+    * */
     function getFillColor(d) {
         if (highlightTeam.indexOf(d["Team"]) >= 0) {
 
@@ -58,6 +78,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
         }
     }
 
+    // Set stroke color of the data point
     function getStrokeColor(d) {
 
         if (highlightTeam.indexOf(d["Team"]) >= 0) {
@@ -69,6 +90,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
         }
     }
 
+    // Set opacity of the data point
     function getOpacity(d) {
         if (highlightTeam.indexOf(d["Team"]) >= 0) {
 
@@ -80,6 +102,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
     }
 
 
+    // Adjust the colors of the data point when it is highlight or unhilight
     function fillDataPointColor(dataPoint) {
 
         dataPoint.attr("fill", getFillColor)
@@ -87,11 +110,15 @@ d3.csv("./agg_team_stat.csv", function (d) {
             .attr("opacity", getOpacity);
     }
 
-    // a flag that determines whether the elements have already drawed
-    var dataDrawed = false;
 
+
+    /*
+    * Draw the main chart
+    * featrueName: the feature (y-axis), e.g. 3PAPG, 3P etc., to be drawn on the figure
+    * */
     function drawMainChart(featureName) {
 
+        // Define the x- and y-scales
 
         var xScale = d3.scale.linear()
             .range([margin.left, chartWidth])
@@ -109,7 +136,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
             })
             ]);
 
-
+        //
         var xAxis = d3.svg.axis()
             .scale(xScale)
             .orient("bottom")
@@ -120,7 +147,10 @@ d3.csv("./agg_team_stat.csv", function (d) {
             .scale(yScale)
             .orient("left");
 
-        // Make x-axis on the chart
+        /*
+        * Make x-axis on the chart.
+        * If x-axis is already on the chart. Skip this step
+        * */
         if (!dataDrawed) {
             d3.select("#chartContainer")
                 .append("g")
@@ -130,6 +160,11 @@ d3.csv("./agg_team_stat.csv", function (d) {
         }
 
 
+
+        /*
+         * Make y-axis on the chart.
+         * If y-axis is already on the chart. Remove it and draw new one.
+         * */
         if (!dataDrawed) {
 
             d3.select("#chartContainer")
@@ -197,8 +232,10 @@ d3.csv("./agg_team_stat.csv", function (d) {
             mainChartG.select("#xlabel").remove();
         }
 
-        // Make y axis on the main chart
-
+        /*
+        * Make y label on the chart with its tooltip.
+        * This tooltips shows the definition of the y label.
+        * */
         mainChartG.append("text")
             .attr("id", "ylabel")
             .attr("transform", "rotate(-90)")
@@ -224,7 +261,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
             });
 
-        // Make x axis on the main chart
+        // Make x label on the main chart
         mainChartG.append("text")
             .attr("id", "xlabel")
             .attr("y", chartHeight + 20)
@@ -241,6 +278,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
     var datapoint = drawMainChart(currentFeature);
 
 
+    // Define the dimension of each team name label
     var barHeight = 20,
         barWidth = 160;
 
@@ -335,8 +373,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
         });
 
 
-    // Place the buttons for selecting different statistics
-    var yFeatures = ["3PAPG", "3PA", "3P", "3P%"];
+
 
     function updateButtonStatus(d) {
         if (d == currentFeature) {
@@ -373,7 +410,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
         .text("Hide League Average");
 
     /* Set default style of the button
-    The "League Average" is highlighted when the chart is loaded.
+    * The "League Average" is highlighted when the chart is loaded.
      */
 
     highlightTeam.push("League Average");
