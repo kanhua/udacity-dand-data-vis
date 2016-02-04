@@ -33,8 +33,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
     var mainChartG = d3.select("#chartContainer")
         .attr("width", svgWidth)
         .attr("height", svgHeight)
-        .append("g")
-        .attr('class', 'chart');
+        .append("g");
 
 
     // a flag that records whether the elements have already drawed
@@ -208,7 +207,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
                     .duration(200)
                     .style("opacity", 0.8);
                 tooltipDiv.html("season:" + d["year"] + "</br>" + "Team:" + d["Team"])
-                    .style("left", (d3.select(this).attr("cx") + 3).toString() + "px")
+                    .style("left", d3.select(this).attr("cx") + "px")
                     .style("top", d3.select(this).attr("cy") + 'px');
 
                 d3.select(this)
