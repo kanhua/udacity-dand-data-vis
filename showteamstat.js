@@ -8,6 +8,9 @@ function getFeature(d, featureName) {
     return d[featureName];
 }
 
+/* Main function that draws the main chart,
+ *  team labels, and y-axis selector buttons
+ */
 d3.csv("./agg_team_stat.csv", function (d) {
     d["3P"] = +d["3P"];
     d["3PA"] = +d["3PA"];
@@ -67,6 +70,12 @@ d3.csv("./agg_team_stat.csv", function (d) {
     * getFillColor(), getStrokeColor() and getOpacity() adjusts the
     * color properties of data point
     * */
+
+    /**
+     * Return the fill color of the data point for d3.select("circle").attr("fill",value)
+     * @param d the datum
+     * @returns {string} the color
+     */
     function getFillColor(d) {
         if (highlightTeam.indexOf(d["Team"]) >= 0) {
 
@@ -77,7 +86,11 @@ d3.csv("./agg_team_stat.csv", function (d) {
         }
     }
 
-    // Set stroke color of the data point
+    /**
+     * Return the fill color of the data point for d3.select("circle").attr("stroke",value)
+     * @param d the datum
+     * @returns {string} the color
+     */
     function getStrokeColor(d) {
 
         if (highlightTeam.indexOf(d["Team"]) >= 0) {
@@ -89,7 +102,11 @@ d3.csv("./agg_team_stat.csv", function (d) {
         }
     }
 
-    // Set opacity of the data point
+    /**
+     * Return the opacity of the data point for d3.select("circle").attr("opacity",value)
+     * @param d the datum
+     * @returns {number} the value of opacity
+     */
     function getOpacity(d) {
         if (highlightTeam.indexOf(d["Team"]) >= 0) {
 
@@ -102,6 +119,12 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
 
     // Adjust the colors of the data point when it is highlight or unhilight
+
+    /**
+     * Update the properties of the data circles on the main chart,
+     * depending on whether a particular team should be highlighted or not
+     * @param dataPoint the selection object of all data circles
+     */
     function fillDataPointColor(dataPoint) {
 
         dataPoint.attr("fill", getFillColor)
@@ -111,10 +134,11 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
 
 
-    /*
-    * Draw the main chart
-    * featrueName: the feature (y-axis), e.g. 3PAPG, 3P etc., to be drawn on the figure
-    * */
+    /**
+     * Draw the main chart
+     * @param the feature (y-axis), e.g. 3PAPG, 3P etc., to be drawn on the figure
+     * @returns {*} the selector of all data circles
+     */
     function drawMainChart(featureName) {
 
         // Define the x- and y-scales
