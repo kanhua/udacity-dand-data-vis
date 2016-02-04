@@ -185,6 +185,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
         }
 
 
+        // Bind circles with data
         d3.select("#chartContainer")
             .selectAll("circle")
             .data(data)
@@ -192,6 +193,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
             .append("circle");
 
 
+        // Set the initial behaviours of data points on the main chart
         var datapoint = d3.selectAll("circle")
             .attr("cx", function (d) {
                 return xScale(d["year"]);
@@ -227,6 +229,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
         fillDataPointColor(datapoint);
 
 
+        // Remove the x and y label if the we are just updating the graph
         if (dataDrawed) {
             mainChartG.select("#ylabel").remove();
             mainChartG.select("#xlabel").remove();
@@ -298,8 +301,11 @@ d3.csv("./agg_team_stat.csv", function (d) {
         .attr("height", labelHeight);
 
 
+    // Set the color of team label rectangles
     function fillBarColor(bd, bar) {
         if (highlightTeam.indexOf(bd) < 0) {
+
+            // Set the color when the team is de-selected
             d3.select(bar)
                 .select("rect")
                 .attr("fill", "white");
@@ -309,6 +315,8 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
         }
         else {
+
+            // Set the color when the team is selected
             d3.select(bar)
                 .select("rect")
                 .attr("fill", teamCode[bd]["color1"]);
@@ -319,6 +327,11 @@ d3.csv("./agg_team_stat.csv", function (d) {
     }
 
 
+    /* Bind the teamname-color data to the g container of each team label
+     * and set its onclick call back function. When each of the container g
+     * is clicked, it adds or removes the corresponded team to highlightTeam array
+     * and update the chart
+      */
     var bar = chartSvgG.selectAll("g")
         .data(teamName)
         .enter()
@@ -329,21 +342,24 @@ d3.csv("./agg_team_stat.csv", function (d) {
         .on("click", function (bd) {
 
             if (highlightTeam.indexOf(bd) >= 0) {
+                // Remove the team from highlightTeam
                 highlightTeam.splice(highlightTeam.indexOf(bd));
 
             }
             else {
+                // Add the team into highlightTeam
                 highlightTeam.push(bd);
             }
 
 
+            //Update the data points in the main chart
             fillBarColor(bd, this);
-
             fillDataPointColor(datapoint);
         })
         ;
 
 
+    // Bind the data with team-label rectangles and set their initial properties.
     bar.append("rect")
         .attr("width", barWidth)
         .attr("height", barHeight - 4)
@@ -361,6 +377,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
         .attr("stroke-width", 1);
 
 
+    // Add team name text onto the team label rectangle
     bar.append("text")
         .attr("x", 3)
         .attr("y", barHeight / 2)
@@ -374,7 +391,9 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
 
 
-
+    /* Set the behavious of button in the bottom of the chart
+    * (the button that selects the which feature to show on the main chart)
+    */
     function updateButtonStatus(d) {
         if (d == currentFeature) {
             return "btn btn-default active";
@@ -384,7 +403,8 @@ d3.csv("./agg_team_stat.csv", function (d) {
         }
     }
 
-
+    /* Bind the available features with the buttons in the bottom of the figures
+     Details of these buttons are provided by Bootstrap framework.*/
     var bpBtnGroup = d3.select("#stat-btn-group");
     bpBtnGroup.selectAll("button")
         .data(yFeatures)
@@ -399,6 +419,7 @@ d3.csv("./agg_team_stat.csv", function (d) {
             return d;
         })
         .on("click", function (d) {
+            // when clicked, update the main chart and reset currentFeature
             drawMainChart(d);
             currentFeature = d;
             bpBtnGroup.selectAll("button")
@@ -415,8 +436,12 @@ d3.csv("./agg_team_stat.csv", function (d) {
 
     highlightTeam.push("League Average");
 
+    // The color of the data points need to be updated
+    // because we just added "League Average" into highlightTeam
     fillDataPointColor(datapoint);
 
+    /*Set the style of "League Average" button based on
+    whether it is already clicked or not*/
     function setlavgButtonStyle(){
 
         if (lavgButton.attr("class") == "btn btn-default") {
